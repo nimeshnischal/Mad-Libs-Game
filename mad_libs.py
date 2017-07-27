@@ -24,26 +24,39 @@ def get_story():
         return -1
 
 
-get_story_response = get_story()
-if get_story_response != -1:
-    story_index_in_file = -1
-    try:
-        story_template = str(get_story_response[0][0])
-        blank_hints = str(get_story_response[0][1]).replace(" ", "").split(";")
-        story_index_in_file = get_story_response[1]
-        print(story_index_in_file)
-        blank_values = []
-        print("Enter the following inputs respective to each instructions:")
-        for hint in blank_hints:
-            blank_values.append(input(hint + " : "))
-            # TODO make a function in nimesh_app_basics input_non_empty_string
-        print(story_template.format(*blank_values))
-    except ValueError:
-        pass
-        # TODO print an error message and exit message
-    except IndexError:
-        if story_index_in_file != -1:
-            print("A problem occurred. Please check the blank hints in file for story no. {0}.".format(story_index_in_file))
-else:
-    pass
-    # TODO print an error message and the exit message
+def play_game():
+    get_story_response = get_story()
+    if get_story_response != -1:
+        story_index_in_file = -1
+        try:
+            story_template = str(get_story_response[0][0])
+            blank_hints = str(get_story_response[0][1]).replace(" ", "").split(";")
+            story_index_in_file = get_story_response[1]
+            blank_values = []
+            print("Input according to respective instructions: (Have fun with utterly nonsensical words!)")
+            for hint in blank_hints:
+                blank_values.append(nimesh_app_basics.get_non_empty_string_input(hint + " : ", "Need a word!"))
+
+            nimesh_app_basics.clear_screen()
+            nimesh_app_basics.print_welcome_message(app_name)
+
+            print(story_template.format(*blank_values) + "\n")
+        except IndexError:
+            if story_index_in_file != -1:
+                print("A problem occurred. Please check the blank hints in file for story no. {0}.".format(story_index_in_file))
+
+
+# ------------------ Main program ------------------ #
+app_name = "Mad Libs"
+
+while True:
+    nimesh_app_basics.clear_screen()
+    nimesh_app_basics.print_welcome_message(app_name)
+    play_game()
+    play_again_boolean = nimesh_app_basics.get_valid_y_n_opinion("Play again? ( y / n ): ")
+    if play_again_boolean:
+        continue
+    else:
+        break
+
+nimesh_app_basics.print_exit_message(app_name)

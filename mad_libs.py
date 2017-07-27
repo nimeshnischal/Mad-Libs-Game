@@ -26,6 +26,7 @@ def get_story():
 
 get_story_response = get_story()
 if get_story_response != -1:
+    story_index_in_file = -1
     try:
         story_template = str(get_story_response[0][0])
         blank_hints = str(get_story_response[0][1]).replace(" ", "").split(";")
@@ -41,7 +42,8 @@ if get_story_response != -1:
         pass
         # TODO print an error message and exit message
     except IndexError:
-        print("A problem occurred. Please check the blank hints in file for story no. {0}.".format(story_index_in_file))
+        if story_index_in_file != -1:
+            print("A problem occurred. Please check the blank hints in file for story no. {0}.".format(story_index_in_file))
 else:
     pass
     # TODO print an error message and the exit message

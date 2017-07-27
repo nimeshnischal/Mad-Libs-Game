@@ -30,11 +30,12 @@ def play_game():
         story_index_in_file = -1
         try:
             story_template = str(get_story_response[0][0])
-            blank_hints = str(get_story_response[0][1]).replace(" ", "").split(";")
+            blank_hints = str(get_story_response[0][1]).split(";")
             story_index_in_file = get_story_response[1]
             blank_values = []
             print("Input according to respective instructions: (Have fun with utterly nonsensical words!)")
             for hint in blank_hints:
+                hint.strip()
                 blank_values.append(nimesh_app_basics.get_non_empty_string_input(hint + " : ", "Need a word!"))
 
             nimesh_app_basics.clear_screen()

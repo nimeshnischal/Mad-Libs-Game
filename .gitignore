@@ -89,3 +89,8 @@ ENV/
 
 # Rope project settings
 .ropeproject
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/Mad-Libs-Game.iml
+.idea/misc.xml
+*.xml
+~$story_templates.xlsx
